@@ -8,6 +8,7 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('TVShows'),),
       body: GridView(
+        padding: const EdgeInsets.all(25),
         children: CATEGORIES
             .map(
               (category) => CategoryItem(category.title, category.color),
@@ -17,6 +18,7 @@ class CategoriesScreen extends StatelessWidget {
           maxCrossAxisExtent: 200,
           childAspectRatio: 3 / 2,
           crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
         ),
       ),
     );
