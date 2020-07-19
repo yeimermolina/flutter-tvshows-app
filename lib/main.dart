@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './screens/filters_screen.dart';
 import './screens/tabs_screen.dart';
 import './screens/show_detail_screen.dart';
 import './screens/category_shows_screen.dart';
@@ -36,10 +37,11 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => TabsScreen(),
         CategoryShowsScreen.routeName: (ctx) => CategoryShowsScreen(),
         ShowDetailScreen.routeName: (ctx) => ShowDetailScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(),
       },
       // onGenerateRoute: (settings) {
       //   print(settings.arguments);
-      //   // sends you back if trying to access a route that does not exist on routes 
+      //   // sends you back if trying to access a route that does not exist on routes
       //   return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
       // },
       onUnknownRoute: (settings) {
