@@ -77,7 +77,7 @@ const SHOWS = const [
       'Test 3'
     ],
     audience: Audience.AllPublic,
-    isOnNetflix: true
+    isOnNetflix: false
   ),
   Show(
     id: 's2',

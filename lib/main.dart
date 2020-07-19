@@ -1,13 +1,49 @@
 import 'package:flutter/material.dart';
+import './data/data.dart';
 import './screens/filters_screen.dart';
 import './screens/tabs_screen.dart';
 import './screens/show_detail_screen.dart';
 import './screens/category_shows_screen.dart';
 import './screens/categories_screen.dart';
+import './models/show.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Map<String, bool> _filters = {
+    'netflix': false,
+    'prime': false,
+    'hbo': false,
+  };
+
+  List<Show> _availableShows = SHOWS;
+
+  void _setFilters(Map<String, bool> filtersData) {
+    setState(() {
+      _filters = filtersData;
+      _availableShows = SHOWS.where((show) {
+        if(_filters['netflix'] == true && !show.isOnNetflix) {
+          return false;
+        }
+
+        if(_filters['prime'] == true && !show.isOnPrime) {
+          return false;
+        }
+
+        if(_filters['hbo'] == true && !show.isOnHbo) {
+          return false;
+        }
+
+        return true;
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,9 +71,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (ctx) => TabsScreen(),
-        CategoryShowsScreen.routeName: (ctx) => CategoryShowsScreen(),
+        CategoryShowsScreen.routeName: (ctx) => CategoryShowsScreen(_availableShows),
         ShowDetailScreen.routeName: (ctx) => ShowDetailScreen(),
-        FiltersScreen.routeName: (ctx) => FiltersScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(_filters, _setFilters),
       },
       // onGenerateRoute: (settings) {
       //   print(settings.arguments);

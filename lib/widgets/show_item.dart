@@ -8,6 +8,7 @@ class ShowItem extends StatelessWidget {
   final String imageUrl;
   final int episodes;
   final Audience audience;
+  final Function removeItem;
 
   ShowItem({
     @required this.id,
@@ -15,6 +16,7 @@ class ShowItem extends StatelessWidget {
     @required this.imageUrl,
     @required this.episodes,
     @required this.audience,
+    @required this.removeItem,
   });
 
   String get audienceText {
@@ -31,7 +33,16 @@ class ShowItem extends StatelessWidget {
   }
 
   void selectShow(BuildContext context) {
-    Navigator.of(context).pushNamed(ShowDetailScreen.routeName, arguments: id);
+    Navigator.of(context)
+        .pushNamed(
+      ShowDetailScreen.routeName,
+      arguments: id,
+    )
+        .then((result) {
+      if (result != null) {
+        removeItem(result);
+      }
+    });
   }
 
   @override
