@@ -21,27 +21,47 @@ class _MyAppState extends State<MyApp> {
     'hbo': false,
   };
 
+  List<Show> _favoriteShows = [];
+
   List<Show> _availableShows = SHOWS;
 
   void _setFilters(Map<String, bool> filtersData) {
     setState(() {
       _filters = filtersData;
       _availableShows = SHOWS.where((show) {
-        if(_filters['netflix'] == true && !show.isOnNetflix) {
+        if (_filters['netflix'] == true && !show.isOnNetflix) {
           return false;
         }
 
-        if(_filters['prime'] == true && !show.isOnPrime) {
+        if (_filters['prime'] == true && !show.isOnPrime) {
           return false;
         }
 
-        if(_filters['hbo'] == true && !show.isOnHbo) {
+        if (_filters['hbo'] == true && !show.isOnHbo) {
           return false;
         }
 
         return true;
       }).toList();
     });
+  }
+
+  void _toggleFavorite(String showId) {
+    final index = _favoriteShows.indexWhere((show) => show.id == showId);
+
+    if (index >= 0) {
+     setState(() {
+       _favoriteShows.removeAt(index);
+     });
+    } else {
+      setState(() {
+        _favoriteShows.add(SHOWS.firstWhere((show) => show.id == showId));
+      });
+    }
+  }
+
+  bool _isShowFavorite(String showId) {
+    return true;
   }
 
   @override
@@ -70,9 +90,10 @@ class _MyAppState extends State<MyApp> {
       // home: CategoriesScreen(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => TabsScreen(),
-        CategoryShowsScreen.routeName: (ctx) => CategoryShowsScreen(_availableShows),
-        ShowDetailScreen.routeName: (ctx) => ShowDetailScreen(),
+        '/': (ctx) => TabsScreen(_favoriteShows),
+        CategoryShowsScreen.routeName: (ctx) =>
+            CategoryShowsScreen(_availableShows),
+        ShowDetailScreen.routeName: (ctx) => ShowDetailScreen(_toggleFavorite, _isShowFavorite),
         FiltersScreen.routeName: (ctx) => FiltersScreen(_filters, _setFilters),
       },
       // onGenerateRoute: (settings) {

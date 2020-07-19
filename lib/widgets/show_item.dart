@@ -8,7 +8,6 @@ class ShowItem extends StatelessWidget {
   final String imageUrl;
   final int episodes;
   final Audience audience;
-  final Function removeItem;
 
   ShowItem({
     @required this.id,
@@ -16,7 +15,6 @@ class ShowItem extends StatelessWidget {
     @required this.imageUrl,
     @required this.episodes,
     @required this.audience,
-    @required this.removeItem,
   });
 
   String get audienceText {
@@ -40,7 +38,7 @@ class ShowItem extends StatelessWidget {
     )
         .then((result) {
       if (result != null) {
-        removeItem(result);
+        // removeItem(result);
       }
     });
   }

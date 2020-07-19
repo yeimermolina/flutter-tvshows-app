@@ -62,7 +62,6 @@ class _CategoryShowsScreenState extends State<CategoryShowsScreen> {
               imageUrl: categoryShows[i].imageUrl,
               episodes: categoryShows[i].episodes.length,
               audience: categoryShows[i].audience,
-              removeItem: (showId) => _removeShow(showId),
             );
           },
           itemCount: categoryShows.length),

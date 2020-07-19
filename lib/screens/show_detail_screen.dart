@@ -3,6 +3,10 @@ import '../data/data.dart';
 
 class ShowDetailScreen extends StatelessWidget {
   static const routeName = '/show-detail';
+  final Function toggleFavorite;
+  final Function isFavorite;
+
+  ShowDetailScreen(this.toggleFavorite, this.isFavorite);
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -83,9 +87,10 @@ class ShowDetailScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.delete), onPressed: () {
-        Navigator.of(context).pop(showId);
-      },),
+      floatingActionButton: FloatingActionButton(
+        child:  Icon(isFavorite(showId) ? Icons.star : Icons.star_border),
+        onPressed: () => toggleFavorite(showId),
+      ),
     );
   }
 }
