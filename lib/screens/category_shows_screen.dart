@@ -28,6 +28,7 @@ class CategoryShowsScreen extends StatelessWidget {
       body: ListView.builder(
           itemBuilder: (ctx, i) {
             return ShowItem(
+              id: categoryShows[i].id,
               title: categoryShows[i].title,
               imageUrl: categoryShows[i].imageUrl,
               episodes: categoryShows[i].episodes.length,

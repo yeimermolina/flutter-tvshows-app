@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import '../screens/show_detail_screen.dart';
 import '../models/show.dart';
 
 class ShowItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int episodes;
   final Audience audience;
 
   ShowItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.episodes,
@@ -27,11 +30,14 @@ class ShowItem extends StatelessWidget {
     }
   }
 
-  void selectShow() {}
+  void selectShow(BuildContext context) {
+    Navigator.of(context).pushNamed(ShowDetailScreen.routeName, arguments: id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectShow,
+      onTap: () => selectShow(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -94,7 +100,7 @@ class ShowItem extends StatelessWidget {
                     width: 6,
                   ),
                   Expanded(
-                                      child: Row(
+                    child: Row(
                       children: <Widget>[
                         Icon(Icons.people),
                         SizedBox(
