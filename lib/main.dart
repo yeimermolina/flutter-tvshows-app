@@ -36,6 +36,14 @@ class MyApp extends StatelessWidget {
         CategoryShowsScreen.routeName: (ctx) => CategoryShowsScreen(),
         ShowDetailScreen.routeName: (ctx) => ShowDetailScreen(),
       },
+      // onGenerateRoute: (settings) {
+      //   print(settings.arguments);
+      //   // sends you back if trying to access a route that does not exist on routes 
+      //   return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      // },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      },
     );
   }
 }
